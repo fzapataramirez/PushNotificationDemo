@@ -2,15 +2,15 @@
 <widget xmlns   = "http://www.w3.org/ns/widgets"
     xmlns:gap   = "http://phonegap.com/ns/1.0"
     id          = "com.tdm"
-    versionCode = "107"
-    version     = "1.0.7" >
+    versionCode = "100"
+    version     = "1.0.0" >
 
   <!-- versionCode is optional and Android only -->
   <preference name="phonegap-version" value="3.7.0" />
-  <name>TDM App</name>
+  <name>Push Notification demo</name>
 
   <description>
-    App para gestionar información de la compañía.
+    Demo
   </description>
 
   <author href="https://www.tdm.com.co" email="felipe.zapata@tdm.com.co">
