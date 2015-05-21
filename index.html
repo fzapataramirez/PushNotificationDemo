@@ -1,0 +1,176 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Push Notification Demo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    
+    
+    <script src="phonegap.js"></script>
+    <script src="PushNotification.js"></script>
+    
+    
+    
+    
+    <script type="text/javascript">
+    var pushNotification;
+
+        $(function () {
+            //localStorage.removeItem("access_token");
+            document.addEventListener("deviceready", onDeviceReady, false);
+
+        });
+
+       
+       function onDeviceReady() {
+
+        //setTimeout(registerDevice, 2000);
+        try {
+
+            
+
+            //window.plugins.OneSignal.init("7f52e414-fe91-11e4-af42-5f8f38f9da7b",
+            //                               { googleProjectNumber: "44082953097" },
+            //                               notificationOpenedCallback);
+
+
+            pushNotification = window.plugins.pushNotification;
+            console.log(device);
+
+            if (device.platform == 'android' || device.platform == 'Android' ||
+                   device.platform == 'amazon-fireos') {
+               pushNotification.register(registerNotificationSuccessHandler, registerNotificationErrorHandler, { "senderID": "661780372179", "ecb": "onNotificationGCM" });
+            } else {
+               //iOS
+               //pushNotification.register(tokenHandler, errorHandler, { "badge": "true", "sound": "true", "alert": "true", "ecb": "onNotificationAPN" });   // required!
+            }
+        }
+        catch (err) {
+            txt = "There was an error on this page.\n\n";
+            txt += "Error description: " + err.message + "\n\n";
+            alert(txt);
+        }
+       
+    }
+    function registerNotificationSuccessHandler(result) {
+        alert("registerNotificationSuccessHandler");
+        var data = { idDispositivo: result };
+        var request = $.ajax({
+            method: 'post',
+            url: app.apiUrl + '/NotificacionApp/RegistrarDispositivo',
+            contentType: "application/json; charset=utf-8",
+            crossDomain: true,
+            data: ko.toJSON(data),
+            headers: {
+                'Authorization': 'Bearer ' + app.obtenerToken().access_token
+            },
+        });
+
+        request.done(function (data) {
+            console.log("Respuesta exitosa de petición a ObtenerPermisosUsuario.");
+            alert("Respuesta exitosa de petición a ObtenerPermisosUsuario.");
+            
+
+        });
+
+        request.fail(function (data) {
+            console.log(data);
+            app.alert(app.procesarErrorWebApi(data), null, "Error", "Aceptar");
+
+        });
+
+
+        alert('Callback Success! Result = ' + result)
+    },
+
+    // result contains any message sent from the plugin call
+    function registerNotificationErrorHandler(result) {
+        alert('Callback Success! Result = ' + result)
+    },
+    
+    function onNotificationGCM(e) {
+        switch (e.event) {
+            case 'registered':
+                if (e.regid.length > 0) {
+                    console.log("Regid " + e.regid);
+                    alert('registration id = ' + e.regid);
+                }
+                break;
+
+            case 'message':
+                // this is the actual push notification. its format depends on the data model from the push server
+                alert('message = ' + e.message + ' msgcnt = ' + e.msgcnt);
+                break;
+
+            case 'error':
+                alert('GCM error = ' + e.msg);
+                break;
+
+            default:
+                alert('An unknown GCM event has occurred');
+                break;
+        }
+    },
+
+    function notificationOpenedCallback(jsonData) {
+        alert("Notification received:\n" + JSON.stringify(jsonData));
+        console.log('didReceiveRemoteNotificationCallBack: ' + JSON.stringify(jsonData));
+    };
+
+    function registerDevice() {
+        
+    }
+
+
+
+    </script>
+
+    
+    
+    
+    
+</head>
+<body>
+    
+
+
+    <div id="loginView" data-role="page">
+        <div data-role="header">
+            <div class="headerDeco1"></div>
+            <div class="headerDeco2"></div>
+            <div class="headerLogo"></div>
+            <h2>Iniciar Sesión</h2>
+        </div>
+        <div data-role="main" class="ui-content">
+            
+
+                <form id="check-user" class="ui-body ui-body-b ui-corner-all" data-ajax="false">
+                    <fieldset class="ui-mini">
+                        <div class="ui-field-contain">
+                            <label for="username">Usuario</label>
+                            <input type="text" value="" name="username" id="username" data-theme="a" />
+                        </div>
+                        <div class="ui-field-contain">
+                            
+                            <label for="password">&nbsp;Contrase&ntilde;a</label>
+                            <input type="password" value="" name="password" id="password" data-theme="a" />
+                        </div>
+                        <div class="ui-field-contain">
+                            
+                            <input type="button" data-theme="b" id="btnLogin" value="Ingresar" onclick="autenticar();">
+                            <a href="#registrarView" class="ui-btn ui-shadow ui-corner-all ui-btn-c">Crear cuenta</a>
+                        </div>
+                    </fieldset>
+                </form>  
+            
+        </div>
+        <div data-role="footer" data-theme="b" data-position="fixed">
+            <h6>Generamos vivencias diferenciales y perdurables</h6>
+
+            <!--<h6>TDM Transportes S.A.S.<br />-->
+        </div>
+    </div>
+
+
+</body>
+</html>

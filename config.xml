@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<widget xmlns   = "http://www.w3.org/ns/widgets"
+    xmlns:gap   = "http://phonegap.com/ns/1.0"
+    id          = "com.tdm"
+    versionCode = "107"
+    version     = "1.0.7" >
+
+  <!-- versionCode is optional and Android only -->
+  <preference name="phonegap-version" value="3.7.0" />
+  <name>TDM App</name>
+
+  <description>
+    App para gestionar información de la compañía.
+  </description>
+
+  <author href="https://www.tdm.com.co" email="felipe.zapata@tdm.com.co">
+    Felipe Zapata Ramírez
+  </author>
+
+  <!-- ++++++++++++++++++++  Plugins +++++++++++++++++++++++++++++++++++++ -->
+  
+  <gap:plugin name="org.apache.cordova.console" />
+  <gap:plugin name="org.apache.cordova.device" />
+  <gap:plugin name="org.apache.cordova.camera" version="0.2.9" />
+  <gap:plugin name="org.apache.cordova.dialogs" />
+  <!--<gap:plugin name="com.phonegap.plugins.pushplugin" version="2.4.0" />-->
+  <!--<gap:plugin name="com.pushapps.phonegap" version="1.7.1" />-->
+  <gap:plugin name="com.onesignal.plugins.onesignal" />
+
+
+  <!-- ++++++++++++++++++++  Iconos +++++++++++++++++++++++++++++++++++++ -->
+  <icon src="icon.png" />
+  
+  <!-- iPhone / iPod Touch  -->
+  <icon src="/icons/ios/icon-60.png" gap:platform="ios" width="60" height="60" />
+  <icon src="/icons/ios/icon-60@2x.png" gap:platform="ios" width="120" height="120" />
+
+  <!-- iPad -->
+  <icon src="/icons/ios/icon-86.png" gap:platform="ios" width="86" height="86" />
+  <icon src="/icons/ios/icon-86@2x.png" gap:platform="ios" width="152" height="152" />
+
+  <!-- Settings Icon -->
+  <icon src="/icons/ios/icon-small.png" gap:platform="ios" width="29" height="29" />
+  <icon src="/icons/ios/icon-small@2x.png" gap:platform="ios" width="58" height="58" />  
+
+  <!-- Android  -->
+  <icon src="/icons/android/ldpi.png" gap:platform="android" gap:qualifier="ldpi" />
+  <icon src="/icons/android/mdpi.png" gap:platform="android" gap:qualifier="mdpi" />
+  <icon src="/icons/android/hdpi.png" gap:platform="android" gap:qualifier="hdpi" />
+  <icon src="/icons/android/xhdpi.png" gap:platform="android" gap:qualifier="xhdpi" />
+  
+
+
+  <preference name="deployment-target" value="5.0" />
+  <access origin="*" />
+  
+</widget>
