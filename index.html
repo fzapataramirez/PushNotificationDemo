@@ -93,12 +93,12 @@
 
 
         alert('Callback Success! Result = ' + result)
-    },
+    }
 
     // result contains any message sent from the plugin call
     function registerNotificationErrorHandler(result) {
         alert('Callback Success! Result = ' + result)
-    },
+    }
     
     function onNotificationGCM(e) {
         switch (e.event) {
@@ -122,12 +122,12 @@
                 alert('An unknown GCM event has occurred');
                 break;
         }
-    },
+    }
 
     function notificationOpenedCallback(jsonData) {
         alert("Notification received:\n" + JSON.stringify(jsonData));
         console.log('didReceiveRemoteNotificationCallBack: ' + JSON.stringify(jsonData));
-    };
+    }
 
     function registerDevice() {
         
